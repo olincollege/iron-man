@@ -46,7 +46,7 @@ def transcribe():
         print(command)
         return command
 
-
+activated = False
 while True:
 	
     print("started recording...")

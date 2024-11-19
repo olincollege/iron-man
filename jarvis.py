@@ -55,31 +55,31 @@ while True:
     command = transcribe()
     if(not activated):
 	    if "jarvis" in command and "activate" in command:
-		activated = True
-		print("activate jarvis")
-		# Play audio
-		sound1 = AudioSegment.from_file("audio/jarvis_activate.mp3")
-		sound2 = AudioSegment.from_file("audio/iron_man_repulsor.mp3")
-		play(sound1)
-		play(sound2)
-		arduino.write(bytes('Activate\n'))
+		    activated = True
+		    print("activate jarvis")
+		    # Play audio
+		    sound1 = AudioSegment.from_file("audio/jarvis_activate.mp3")
+		    sound2 = AudioSegment.from_file("audio/iron_man_repulsor.mp3")
+		    play(sound1)
+		    play(sound2)
+		    arduino.write(bytes('Activate\n'))
     elif(activated):
 	    if "open" in command and "helmet" in command:
-		# Open helmet with servo
-		print("helmet opened")
-		# Play audio
-		sound = AudioSegment.from_file("audio/open_helmet.mp3")
-		play(sound)
-		arduino.write(bytes(b'Open helmet\n'))
+		    # Open helmet with servo
+		    print("helmet opened")
+		    # Play audio
+		    sound = AudioSegment.from_file("audio/open_helmet.mp3")
+		    play(sound)
+		    arduino.write(bytes(b'Open helmet\n'))
 	    
 	    elif "close" in command and "helmet" in command:
-		# Close helmet with servo
-		print("helmet closed")
-		# Play audio
-		sound = AudioSegment.from_file("audio/close_helmet.mp3")
-		play(sound)
-		arduino.write(bytes(b'Close helmet\n'))
+		    # Close helmet with servo
+		    print("helmet closed")
+		    # Play audio
+		    sound = AudioSegment.from_file("audio/close_helmet.mp3")
+		    play(sound)
+		    arduino.write(bytes(b'Close helmet\n'))
 	    
 	    elif "bye" in command:
-		print("bye bye!")
-		break
+		    print("bye bye!")
+		    break

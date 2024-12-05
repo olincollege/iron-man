@@ -54,32 +54,40 @@ while True:
     print("stop recording...")
     command = transcribe()
     if(not activated):
-	    if "jarvis" in command and "activate" in command:
-		    activated = True
-		    print("activate jarvis")
-		    # Play audio
-		    sound1 = AudioSegment.from_file("audio/jarvis_activate.mp3")
-		    sound2 = AudioSegment.from_file("audio/iron_man_repulsor.mp3")
-		    play(sound1)
-		    play(sound2)
-		    arduino.write(bytes(b'Activate\n'))
+        if "jarvis" in command and "activate" in command:
+            activated = True
+            print("activate jarvis")
+            # Play audio
+            sound1 = AudioSegment.from_file("audio/jarvis_activate.mp3")
+            sound2 = AudioSegment.from_file("audio/iron_man_repulsor.mp3")
+
+            arduino.write(bytes(b'<Activate Jarvis>\n'))
+            play(sound1)
+            play(sound2)
     elif(activated):
-	    if "open" in command and "helmet" in command:
-		    # Open helmet with servo
-		    print("helmet opened")
-		    # Play audio
-		    sound = AudioSegment.from_file("audio/open_helmet.mp3")
-		    play(sound)
-		    arduino.write(bytes(b'Open helmet\n'))
+        if "open" in command and "helmet" in command:
+            # Open helmet with servo
+            print("helmet opened")
+            # Play audio
+            sound = AudioSegment.from_file("audio/open_helmet.mp3")
+            arduino.write(bytes(b'Open helmet\n'))
+            play(sound)
 	    
-	    elif "close" in command and "helmet" in command:
+        elif "close" in command and "helmet" in command:
 		    # Close helmet with servo
-		    print("helmet closed")
+            print("helmet closed")
 		    # Play audio
-		    sound = AudioSegment.from_file("audio/close_helmet.mp3")
-		    play(sound)
-		    arduino.write(bytes(b'Close helmet\n'))
-	    
-	    elif "bye" in command:
-		    print("bye bye!")
-		    break
+            sound = AudioSegment.from_file("audio/close_helmet.mp3")
+            arduino.write(bytes(b'Close helmet\n'))
+            play(sound)
+        elif "deactivate" in command and "jarvis" in command:
+            sound1 = AudioSegment.from_file("audio/jarvis_deactivating.mp3")
+            sound2 = AudioSegment.from_file("audio/power_down.mp3")
+
+            arduino.write(bytes(b'<Deactivate Jarvis>\n'))
+            play(sound1)
+            play(sound2)
+            break
+        elif "bye" in command:
+            print("bye bye!")
+            break

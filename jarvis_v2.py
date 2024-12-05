@@ -11,6 +11,9 @@ from groq import Groq
 from dotenv import load_dotenv
 import speech_recognition as sr
 import serial
+import subprocess
+import datetime
+
 load_dotenv()
 # Configure loggingf
 logging.basicConfig(
@@ -113,12 +116,10 @@ while True:
         if "jarvis" in command and "activate" in command:
             ACTIVATED = True
             logging.info("activate jarvis")
+            arduino.write(bytes(b'<Activate Jarvis>\n'))
             # Play audio
-            sound1 = AudioSegment.from_file("audio/jarvis_activate.mp3")
-            play(sound1)
-            sound2 = AudioSegment.from_file("audio/iron_man_repulsor.mp3")
-            play(sound2)
-            arduino.write(bytes(b"Activate\n"))
+            play(AudioSegment.from_file("audio/jarvis_activate.mp3"))
+            play(AudioSegment.from_file("audio/iron_man_repulsor.mp3"))
     elif ACTIVATED:
         if "open" in command and "helmet" in command:
             # Open helmet with servo
@@ -134,6 +135,35 @@ while True:
             sound = AudioSegment.from_file("audio/close_helmet.mp3")
             play(sound)
             arduino.write(bytes(b"Close helmet\n"))
+
+        elif "jarvis" in command and (("say cheese" in command) or ("take" in command and "picture" in command)):
+            now = datetime.datetime.now()
+            # Take a picture, name the jpg file after the time when taken
+            subprocess.run(["libcamera", "-o", f"{now:%Y-%m-%d %H:%M}.jpg"])
+            arduino.write(bytes(b'<Take Photo>\n'))
+            logging.info("taking photo")
+            # Play audio
+            play(AudioSegment.from_file("audio/say_cheese.mp3"))
+            play(AudioSegment.from_file("audio/camera_stutter.mp3"))
+
+        elif "take" in command and "video" in command and "jarvis" in command:
+            now = datetime.datetime.now()
+            # Take a 10s video
+            subprocess.run(["libcamera-vid", "--codec", "libav", "--libav-audio", "-o", 
+                            f"images/videos/{now:%Y-%m-%d %H:%M}.mp4", "--timeout", "10000"])
+            arduino.write(bytes(b'<Take Video>\n'))
+            logging.info("taking photo")
+            play(AudioSegment.from_file("audio/say_cheese.mp3"))
+            play(AudioSegment.from_file("audio/camera_stutter.mp3"))
+
+        elif "deactivate" in command and "jarvis" in command:
+            ACTIVATED = False
+            sound1 = AudioSegment.from_file("audio/jarvis_deactivating.mp3")
+            sound2 = AudioSegment.from_file("audio/power_down.mp3")
+            arduino.write(bytes(b'<Deactivate Jarvis>\n'))
+            play(sound1)
+            play(sound2)
+            logging.info("deactivating jarvis")
         elif "bye" in command:
             logging.info("bye bye!")
             break

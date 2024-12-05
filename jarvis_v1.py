@@ -83,7 +83,6 @@ while True:
         elif "deactivate" in command and "jarvis" in command:
             sound1 = AudioSegment.from_file("audio/jarvis_deactivating.mp3")
             sound2 = AudioSegment.from_file("audio/power_down.mp3")
-
             arduino.write(bytes(b'<Deactivate Jarvis>\n'))
             play(sound1)
             play(sound2)

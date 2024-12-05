@@ -3,3 +3,6 @@ groq
 pygobject
 pydub
 # sudo apt-get install libportaudio2
+python-dotenv
+SpeechRecognition
+pyaudio

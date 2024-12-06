@@ -1,7 +1,8 @@
-from dotenv import load_dotenv
-from openai import OpenAI
 import os
 import base64
+import logging
+from dotenv import load_dotenv
+from openai import OpenAI
 
 load_dotenv()
 client = OpenAI()
@@ -19,8 +20,9 @@ def general_response(voice_command):
             },
         ],
     )
-
-    return completion.choices[0].message
+    general_response = completion.choices[0].message.content
+    logging.info(completion.choices[0].message.content)
+    return general_response
 
 
 # Function to encode the image
@@ -51,8 +53,9 @@ def describe_image(image_path):
             }
         ],
     )
-
-    return response.choices[0].message.content
+    image_description = response.choices[0].message.content
+    logging.info(image_description)
+    return image_description
 
 
 def image_response():

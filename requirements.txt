@@ -8,6 +8,7 @@ pydub
 python-dotenv
 SpeechRecognition
 # sudo apt install portaudio19-dev
+# sudo apt install ffmpeg
 pyserial
 python-dotenv
 SpeechRecognition

@@ -139,7 +139,7 @@ while True:
         elif "jarvis" in command and (("say cheese" in command) or ("take" in command and "picture" in command)):
             now = datetime.datetime.now()
             # Take a picture, name the jpg file after the time when taken
-            subprocess.run(["libcamera", "-o", f"{now:%Y-%m-%d %H:%M}.jpg"])
+            subprocess.run(["libcamera-still", "-o", f"images/{now:%Y-%m-%d %H:%M}.jpg", "--qt"])
             logging.info("taking photo")
             # Play audio
             play(AudioSegment.from_file("audio/say_cheese.mp3"))
@@ -149,7 +149,7 @@ while True:
             now = datetime.datetime.now()
             # Take a 10s video
             subprocess.run(["libcamera-vid", "--codec", "libav", "--libav-audio", "-o", 
-                            f"images/videos/{now:%Y-%m-%d%H:%M}.mp4", "--timeout", "10000"])
+                            f"images/videos/{now:%Y-%m-%d%H:%M}.mp4", "--timeout", "10000", "--qt"])
             logging.info("taking video")
             play(AudioSegment.from_file("audio/say_cheese.mp3"))
             play(AudioSegment.from_file("audio/camera_stutter.mp3"))

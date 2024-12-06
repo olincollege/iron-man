@@ -12,3 +12,5 @@ pyserial
 python-dotenv
 SpeechRecognition
 pyaudio
+openai
+gtts

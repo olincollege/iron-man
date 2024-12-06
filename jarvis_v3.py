@@ -67,6 +67,9 @@ while True:
             # Play audio
             play(AudioSegment.from_file("audio/say_cheese.mp3"))
             play(AudioSegment.from_file("audio/camera_stutter.mp3"))
+            # llm processng
+            llm_response = llm.image_response()
+            tts.chunked_speak_bytefile(llm_response, chunk_size=50)
 
         elif "take" in command and "video" in command and "jarvis" in command:
             now = datetime.datetime.now()
@@ -99,3 +102,6 @@ while True:
         elif "bye" in command:
             logging.info("bye bye!")
             break
+        else:
+            llm_response = llm.general_response(command)
+            tts.chunked_speak_bytefile(llm_response, chunk_size=50)

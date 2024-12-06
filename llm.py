@@ -58,4 +58,4 @@ def describe_image(image_path):
 def image_response():
     recent_image_path = os.listdir("images")[-1]
     image_path = os.path.join("images", recent_image_path)
-    describe_image(image_path)
+    return describe_image(image_path)

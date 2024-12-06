@@ -1,4 +1,6 @@
 sounddevice
+scipy
+pydub
 groq
 pygobject
 # sudo apt-get install libportaudio2
@@ -6,4 +8,7 @@ pydub
 python-dotenv
 SpeechRecognition
 # sudo apt install portaudio19-dev
+pyserial
+python-dotenv
+SpeechRecognition
 pyaudio

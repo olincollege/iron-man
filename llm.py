@@ -20,7 +20,7 @@ def general_response(voice_command):
         ],
     )
 
-    return completion.choices[0].message
+    return completion.choices[0].message.content
 
 
 # Function to encode the image

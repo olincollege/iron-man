@@ -13,12 +13,16 @@ def general_response(voice_command):
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "system",
+                "content": "You are a helpful assistant called Jarvis. Your answers are short and concise.",
+            },
             {
                 "role": "user",
                 "content": voice_command,
             },
         ],
+        max_tokens=64,
     )
     general_response = completion.choices[0].message.content
     logging.info(completion.choices[0].message.content)
@@ -43,7 +47,7 @@ def describe_image(image_path):
                 "content": [
                     {
                         "type": "text",
-                        "text": "Please describe the image.",
+                        "text": "Please describe the image. Your answers are short and concise.",
                     },
                     {
                         "type": "image_url",
@@ -52,6 +56,7 @@ def describe_image(image_path):
                 ],
             }
         ],
+        max_tokens=128,
     )
     image_description = response.choices[0].message.content
     logging.info(image_description)
